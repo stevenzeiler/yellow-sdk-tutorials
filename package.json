@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "npx tsx connect_auth_get_balances.ts",
+    "dev": "npx tsx watch connect_auth_get_balances.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["nitrolite", "erc7824", "state-channels", "ethereum", "l2", "tutorial"],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "A TypeScript demo application showing how to connect to the Yellow network, authenticate using wallet signatures, and receive real-time balance updates using Nitrolite (ERC-7824).",
   "dependencies": {
     "@erc7824/nitrolite": "^0.4.0",
     "dotenv": "^17.2.3",
