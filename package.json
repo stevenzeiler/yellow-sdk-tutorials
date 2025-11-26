@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npx tsx connect_auth_get_balances.ts",
-    "dev": "npx tsx watch connect_auth_get_balances.ts",
+    "start": "npx tsx scripts/connect_auth_get_balances.ts",
+    "dev": "npx tsx watch scripts/connect_auth_get_balances.ts",
+    "auth": "npx tsx scripts/simplified_client_auth.ts",
+    "rideshare": "npx tsx scripts/rideshare_demo.ts",
+    "tip": "npx tsx scripts/connect_and_tip.ts",
+    "channel": "npx tsx scripts/open_and_close_channel.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -21,8 +25,8 @@
   "dependencies": {
     "@erc7824/nitrolite": "^0.4.0",
     "dotenv": "^17.2.3",
-    "viem": "^2.39.2",
-    "yellow-ts": "^0.0.5"
+    "viem": "^2.40.3",
+    "yellow-ts": "0.4.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.1"
