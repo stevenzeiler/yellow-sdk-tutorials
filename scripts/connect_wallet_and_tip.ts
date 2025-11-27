@@ -33,6 +33,7 @@ export async function main() {
 
     const sessionExpireTimestamp = String(Math.floor(Date.now() / 1000) + 3600);
 
+    // TODO: update auth params to 0.5.0
     const authMessage = await createAuthRequestMessage({
         address: wallet.address,
         session_key: sessionKey.address,
@@ -54,6 +55,7 @@ export async function main() {
             case RPCMethod.AuthChallenge:
                 console.log('Auth challenge', message.params);
 
+		// TODO: update auth params to 0.5.0
                 const authParams = {
                     scope: 'test.app',
                     application: wallet.address,
