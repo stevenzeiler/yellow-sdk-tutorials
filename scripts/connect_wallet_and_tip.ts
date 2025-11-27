@@ -37,11 +37,13 @@ export async function main() {
     const authMessage = await createAuthRequestMessage({
         address: wallet.address,
         session_key: sessionKey.address,
-        app_name: 'Test app',
-        allowances: [],
-        expire: sessionExpireTimestamp,
+        application: 'clearnode',
+        allowances: [{
+            asset: 'usdc',
+            amount: '0.01',
+        }],
+        expires_at: BigInt(sessionExpireTimestamp),
         scope: 'test.app',
-        application: wallet.address,
     })
 
     console.log('Auth message', authMessage);
@@ -55,16 +57,19 @@ export async function main() {
             case RPCMethod.AuthChallenge:
                 console.log('Auth challenge', message.params);
 
-		// TODO: update auth params to 0.5.0
+                // TODO: update auth params to 0.5.0
                 const authParams = {
                     scope: 'test.app',
-                    application: wallet.address,
-                    participant: sessionKey.address,
-                    expire: sessionExpireTimestamp,
-                    allowances: [],
+                    address: wallet.address,
+                    session_key: sessionKey.address,
+                    expires_at: BigInt(sessionExpireTimestamp),
+                    allowances: [{
+                        asset: 'usdc',
+                        amount: '0.01',
+                    }],
                 }
 
-                const eip712Signer = createEIP712AuthMessageSigner(walletClient, authParams, { name: 'Test app' });
+                const eip712Signer = createEIP712AuthMessageSigner(walletClient, authParams, { name: 'clearnode' });
 
                 const authVerifyMessage = await createAuthVerifyMessage(eip712Signer, message as AuthChallengeResponse);
 
