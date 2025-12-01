@@ -36,11 +36,13 @@ export async function main() {
     const authMessage = await createAuthRequestMessage({
         address: wallet.address,
         session_key: sessionKey.address,
-        app_name: 'Test app',
-        allowances: [],
-        expire: sessionExpireTimestamp,
+        application: 'Test app',
+        allowances: [{
+            asset: 'usdc',
+            amount: '0.01',
+        }],
+        expires_at: BigInt(sessionExpireTimestamp),
         scope: 'test.app',
-        application: wallet.address,
     })
 
     console.log('Auth message', authMessage);
@@ -59,7 +61,12 @@ export async function main() {
                     application: wallet.address,
                     participant: sessionKey.address,
                     expire: sessionExpireTimestamp,
-                    allowances: [],
+                    allowances: [{
+                        asset: 'usdc',
+                        amount: '0.01',
+                    }],
+                    session_key: sessionKey.address,
+                    expires_at: BigInt(sessionExpireTimestamp),
                 }
 
                 const eip712Signer = createEIP712AuthMessageSigner(walletClient, authParams, { name: 'Test app' });
@@ -78,7 +85,8 @@ export async function main() {
                 const sessionSigner = createECDSAMessageSigner(sessionKey.privateKey);
 
                 const transferPayload = await createTransferMessage(sessionSigner, {
-                    destination: '0xe487a5287f511de9dbfe11d8fb56b83432580e7c',
+                    //destination: '0xe487a5287f511de9dbfe11d8fb56b83432580e7c',
+                    destination: '0xbec3ec09369258017d775ab6ba3d31f2cb65fed1',
                     allocations: [
                         {
                             asset: 'usdc',
@@ -92,6 +100,7 @@ export async function main() {
                 yellow.sendMessage(transferPayload);
 
                 break;
+            
 
             case RPCMethod.BalanceUpdate:
                 console.log('Balance update', message.params);

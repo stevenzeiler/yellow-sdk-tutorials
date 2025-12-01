@@ -83,6 +83,8 @@ export async function main() {
                 participant: sessionKey.address as `0x${string}`,
                 expire: sessionExpireTimestamp, // 24 hours from now
                 allowances: [],
+                session_key: sessionKey.address,
+                expires_at: BigInt(sessionExpireTimestamp),
             };
 
             const eip712Signer = createEIP712AuthMessageSigner(walletClient, authParams, { name: APP_NAME });
