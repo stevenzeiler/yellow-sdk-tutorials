@@ -23,7 +23,7 @@
     "@erc7824/nitrolite": "^0.5.0",
     "dotenv": "^17.2.3",
     "viem": "^2.39.2",
-    "yellow-ts": "^0.0.5"
+    "yellow-ts": "^0.0.7"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
