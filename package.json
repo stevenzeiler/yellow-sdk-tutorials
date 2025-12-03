@@ -21,9 +21,11 @@
   "description": "A TypeScript demo application showing how to connect to the Yellow network, authenticate using wallet signatures, and receive real-time balance updates using Nitrolite (ERC-7824).",
   "dependencies": {
     "@erc7824/nitrolite": "^0.5.0",
+    "@types/yargs": "^17.0.35",
     "dotenv": "^17.2.3",
     "viem": "^2.39.2",
-    "yellow-ts": "^0.0.7"
+    "yargs": "^18.0.0",
+    "yellow-ts": "^0.0.8"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
