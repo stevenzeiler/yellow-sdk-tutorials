@@ -67,32 +67,6 @@ const argv = yargs(hideBin(process.argv))
     .example('$0 -c 0x123... -a -0.5', 'Deallocate: move 0.5 USDC back to channel')
     .parseSync();
 
-function toBigInt(value: number | bigint): bigint {
-    return typeof value === 'bigint' ? value : BigInt(value);
-}
-
-export function composeResizeChannelParams(
-    channelId: Hex,
-    resizeResponseParams: RPCChannelOperation,
-    previousState: State,
-): ResizeChannelParams {
-    console.log({
-        channelId,
-        resizeResponseParams,
-        previousState,
-    })
-    return {
-            resizeState: {
-                channelId,
-                ...resizeResponseParams.state,
-                serverSignature: resizeResponseParams.serverSignature,
-                data: resizeResponseParams.state.stateData as Hex,
-                version: BigInt(resizeResponseParams.state.version),
-            },
-            //proofStates: [previousState],
-            proofStates: [],
-        };
-}
 
 export async function main() {
     config();
@@ -172,7 +146,6 @@ export async function main() {
                     await yellow.disconnect();
                     process.exit(1);
                 }
-
                 // Funds destination: broker for allocation, user for deallocation
                 const isAllocating = allocateAmount !== undefined && allocateAmount > 0;
                 const fundsDestination = (isAllocating ? brokerAddress : walletAddress) as `0x${string}`;
