@@ -35,7 +35,7 @@ export const walletClient = createWalletClient({
     chain: base,
     transport: http(),
 })
-export async function authentitate(client: Client): Promise<SessionKey> {
+export async function authenticate(client: Client): Promise<SessionKey> {
 
     console.log(`Wallet address: ${account.address}`);
 
@@ -46,22 +46,29 @@ export async function authentitate(client: Client): Promise<SessionKey> {
     // Create authentication message with session configuration
     const authMessage = await createAuthRequestMessage({
         address: account.address,
-        session_key: sessionKey.address, // Using account address as session key
-        app_name: APP_NAME,
-        allowances: [], // Define RPC allowances as needed
-        expire: sessionExpireTimestamp,
-        scope: AUTH_SCOPE, // Chain scope
-        application: account.address, // Application contract address
+        session_key: sessionKey.address,
+        application: 'Test app',
+        allowances: [{
+            asset: 'usdc',
+            amount: '0.01',
+        }],
+        expires_at: BigInt(sessionExpireTimestamp),
+        scope: 'test.app',
     });
 
     async function handleAuthChallenge(message: AuthChallengeResponse) {
 
         const authParams = {
-            scope: AUTH_SCOPE,
-            application: walletClient.account?.address as `0x${string}`,
-            participant: sessionKey.address as `0x${string}`,
+            scope: 'test.app',
+            application: account.address,
+            participant: sessionKey.address,
             expire: sessionExpireTimestamp,
-            allowances: [],
+            allowances: [{
+                asset: 'usdc',
+                amount: '0.01',
+            }],
+            session_key: sessionKey.address,
+            expires_at: BigInt(sessionExpireTimestamp),
         };
 
         const eip712Signer = createEIP712AuthMessageSigner(walletClient, authParams, { name: APP_NAME });

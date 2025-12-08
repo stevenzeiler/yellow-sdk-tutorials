@@ -25,7 +25,7 @@
     "dotenv": "^17.2.3",
     "viem": "^2.39.2",
     "yargs": "^18.0.0",
-    "yellow-ts": "^0.0.8"
+    "yellow-ts": "^0.0.10"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
