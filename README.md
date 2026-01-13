@@ -1,4 +1,4 @@
-# Nitrolite Tutorial - Connect, Authenticate & Get Balances
+# Yellow SDK Tutorial - Example Scripts for Developers
 
 A TypeScript demo application showing how to connect to the Yellow network, authenticate using wallet signatures, and receive real-time balance updates using Nitrolite (ERC-7824).
 
@@ -13,6 +13,78 @@ echo 'SEED_PHRASE="your seed phrase here"' > .env
 
 # 3. Run the demo
 npm start
+```
+
+## 📜 Example Scripts
+
+The `./scripts` directory contains example scripts demonstrating various Nitrolite operations:
+
+### Wallet Management
+
+| Script | Description |
+|--------|-------------|
+| [`create_wallet.ts`](./scripts/create_wallet.ts) | Generate a new wallet with a 12-word seed phrase, private key, and Ethereum address |
+| [`mnemonic_to_private_key.ts`](./scripts/mnemonic_to_private_key.ts) | Convert a mnemonic seed phrase to its corresponding private key |
+
+### Channel Operations
+
+| Script | Description |
+|--------|-------------|
+| [`create_channel.ts`](./scripts/create_channel.ts) | Create a USDC payment channel on Base with full on-chain execution via NitroliteClient |
+| [`create_channel_demo.ts`](./scripts/create_channel_demo.ts) | Demonstration of creating a channel with on-chain transaction using the Nitrolite SDK |
+| [`create_channel_demo_live.ts`](./scripts/create_channel_demo_live.ts) | Live demo variant of channel creation with on-chain execution |
+| [`close_channel.ts`](./scripts/close_channel.ts) | Close an existing payment channel given its channel ID |
+| [`list_account_channels.ts`](./scripts/list_account_channels.ts) | List all open channels for your account using NitroliteClient |
+| [`resize_channel.ts`](./scripts/resize_channel.ts) | Resize a channel to add/remove funds between custody and channel (event-driven style) |
+| [`resize_channel_inline.ts`](./scripts/resize_channel_inline.ts) | Resize a channel using async/await inline style (cleaner alternative) |
+| [`resize_to_unified_ledger.ts`](./scripts/resize_to_unified_ledger.ts) | Move funds from channel to the Yellow unified ledger balance |
+
+### Balance & Deposit Operations
+
+| Script | Description |
+|--------|-------------|
+| [`deposit_to_custody.ts`](./scripts/deposit_to_custody.ts) | Deposit USDC to the custody contract on Base network |
+| [`fund_channel.ts`](./scripts/fund_channel.ts) | Fund a channel by depositing to custody and checking ledger balances |
+| [`get_custody_balance.ts`](./scripts/get_custody_balance.ts) | Fetch your on-chain custody balance for USDC on Base |
+| [`get_ledger_balances.ts`](./scripts/get_ledger_balances.ts) | Fetch your Yellow ledger balances after authenticating |
+| [`deposit_resize_allocate.ts`](./scripts/deposit_resize_allocate.ts) | Complete workflow: deposit → create channel → allocate → transfer → deallocate → withdraw |
+
+### App Sessions
+
+| Script | Description |
+|--------|-------------|
+| [`create_app_session.ts`](./scripts/create_app_session.ts) | Create an app session between two participants with initial allocations |
+| [`update_app_session.ts`](./scripts/update_app_session.ts) | Update an existing app session's state with new allocations |
+| [`close_app_session.ts`](./scripts/close_app_session.ts) | Close an app session given the session ID |
+
+📚 **[Read the complete App Sessions Tutorial →](./scripts/app_sessions/README.md)**
+
+### Transfers
+
+| Script | Description |
+|--------|-------------|
+| [`connect_wallet_and_tip.ts`](./scripts/connect_wallet_and_tip.ts) | Connect to Yellow and send a transfer (tip) to another address |
+
+### Configuration
+
+| Script | Description |
+|--------|-------------|
+| [`get_config.ts`](./scripts/get_config.ts) | Fetch Yellow network configuration including custody contract addresses |
+
+### Running Scripts
+
+All scripts can be run using tsx:
+
+```bash
+# Run any script
+npx tsx scripts/<script_name>.ts
+
+# Examples:
+npx tsx scripts/create_wallet.ts
+npx tsx scripts/get_ledger_balances.ts
+npx tsx scripts/deposit_to_custody.ts --amount 1.0
+npx tsx scripts/resize_channel.ts --channel-id 0x123... --allocate 0.5
+npx tsx scripts/close_app_session.ts --session-id 0x456...
 ```
 
 ## 🎯 What This Demo Does
