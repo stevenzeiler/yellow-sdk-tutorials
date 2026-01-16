@@ -53,7 +53,8 @@ The `./scripts` directory contains example scripts demonstrating various Nitroli
 
 | Script | Description |
 |--------|-------------|
-| [`create_app_session.ts`](./scripts/create_app_session.ts) | Create an app session between two participants with initial allocations |
+| [`app_session_two_signers.ts`](./scripts/app_sessions/app_session_two_signers.ts) | Complete 2-party app session flow with equal voting (50/50, 100% quorum) |
+| [`app_session_three_signers_weighted.ts`](./scripts/app_sessions/app_session_three_signers_weighted.ts) | 3-party weighted voting session (founder 50%, investors 30%/20%, 60% quorum) |
 | [`update_app_session.ts`](./scripts/update_app_session.ts) | Update an existing app session's state with new allocations |
 | [`close_app_session.ts`](./scripts/close_app_session.ts) | Close an app session given the session ID |
 

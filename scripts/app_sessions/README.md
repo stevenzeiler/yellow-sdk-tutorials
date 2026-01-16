@@ -36,11 +36,12 @@ Unlike simple payment channels (1-to-1), application sessions support:
 
 ### Environment Setup
 
-You'll need two wallet seed phrases in your `.env` file:
+You'll need two wallet seed phrases in your `.env` file (three for weighted voting example):
 
 ```bash
 SEED_PHRASE="first wallet 12 or 24 word mnemonic here"
 WALLET_2_SEED_PHRASE="second wallet 12 or 24 word mnemonic here"
+WALLET_3_SEED_PHRASE="third wallet mnemonic (optional, for weighted voting example)"
 ```
 
 ### Funded Wallets
@@ -252,10 +253,17 @@ const closeResponse = await yellow.sendMessage(JSON.stringify(closeMessageJson))
 
 ## Code Examples
 
-### Running the Full Example
+### Running the Examples
 
+**Two-party session with equal voting:**
 ```bash
-npx tsx scripts/create_app_session.ts
+npx tsx scripts/app_sessions/app_session_two_signers.ts
+```
+
+**Three-party session with weighted voting:**
+```bash
+# Requires WALLET_3_SEED_PHRASE in .env
+npx tsx scripts/app_sessions/app_session_three_signers_weighted.ts
 ```
 
 ### Expected Output
@@ -360,16 +368,28 @@ const newAppDefinition = {
 
 ### Weighted Voting
 
-Different participants can have different voting power:
+Different participants can have different voting power. This is useful for governance scenarios like founder/investor relationships or DAO voting with token weights.
+
+**Example: Founder and Two Investors**
 
 ```typescript
 const appDefinition = {
     participants: [founder, investor1, investor2],
     weights: [50, 30, 20],  // Founder has 50% voting power
     quorum: 60,  // Founder + one investor = 60%
-    // ...
+    challenge: 0,
+    nonce: Date.now(),
+    application: 'Founder-Investor Governance',
 };
 ```
+
+**Quorum Scenarios:**
+- ✅ Founder (50%) + Investor 1 (30%) = 80% (meets quorum)
+- ✅ Founder (50%) + Investor 2 (20%) = 70% (meets quorum)
+- ✅ All three = 100% (meets quorum)
+- ❌ Investor 1 (30%) + Investor 2 (20%) = 50% (below quorum)
+
+📝 **See full example:** [`app_session_three_signers_weighted.ts`](./app_session_three_signers_weighted.ts)
 
 ### Challenge Periods
 
@@ -471,6 +491,13 @@ console.log(`Current weight: ${signatureWeight}, Required: ${quorum}`);
 8. **Document application logic** for all participants
 
 ## Related Scripts
+
+### App Session Examples
+
+- [`app_session_two_signers.ts`](./app_session_two_signers.ts) - Two-party session with equal voting
+- [`app_session_three_signers_weighted.ts`](./app_session_three_signers_weighted.ts) - Three-party weighted voting session
+
+### Utility Scripts
 
 - [`update_app_session.ts`](../update_app_session.ts) - Update session state
 - [`close_app_session.ts`](../close_app_session.ts) - Close a session by ID
