@@ -10,7 +10,7 @@
  * git clone https://github.com/stevenzeiler/yellow-sdk-tutorials.git
  * cd yellow-sdk-tutorials
  * npm install
- * # Add SEED_PHRASE and WALLET_2_SEED_PHRASE to .env
+ * # Add WALLET_1_SEED_PHRASE and WALLET_2_SEED_PHRASE to .env
  * npx tsx scripts/app_sessions/app_session_two_signers.ts
  * ```
  * 
@@ -36,7 +36,7 @@
  * Prerequisites:
  * --------------
  * - Two seed phrases in .env file:
- *   SEED_PHRASE="first wallet mnemonic here"
+ *   WALLET_1_SEED_PHRASE="first wallet mnemonic here"
  *   WALLET_2_SEED_PHRASE="second wallet mnemonic here"
  * - Both wallets should have USDC in Yellow ledger (see deposit_to_custody.ts)
  * 
