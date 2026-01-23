@@ -76,7 +76,7 @@ export async function main() {
     // Create wallet clients for both participants from their seed phrases
     // In a real application, each participant would control their own wallet
     const walletClient = createWalletClient({
-        account: mnemonicToAccount(process.env.SEED_PHRASE as string),
+        account: mnemonicToAccount(process.env.WALLET_1_SEED_PHRASE as string),
         chain: base,
         transport: http(),
     });
