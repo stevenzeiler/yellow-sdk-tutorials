@@ -12,10 +12,9 @@ Last checked 2026-11-20 (github-audit pass 02).
 - `tsc --noEmit` fails in `connect_auth_get_balances.ts`: `app_name` is not a known property of the auth request in nitrolite 0.5.1, plus an implicit `any` on the listener argument. The main demo likely needs a small update.
 - No script was run in this pass (they need a funded wallet and the live network), so current behaviour against Yellow is unknown.
 - `scripts/app_session_two_signers.ts` duplicates `scripts/app_sessions/app_session_two_signers.ts`.
-- `scripts/app_sessions/README.md` may still mention scripts that are not in the repo (for example a three-signer example). Not checked line by line.
+- `scripts/app_sessions/README.md` refers to scripts that are not in the repo (for example `app_session_three_signers_weighted.ts` and `create_wallet.ts`).
 - The old README listed scripts that do not exist (`create_wallet.ts`, `close_channel.ts`, `get_config.ts` and others). The new README lists only files that are present.
 - `tsx` is used but not declared as a dependency.
-- Rideshare demo and the `v0.5.0-upgrade` branch exist upstream of main only as history.
 
 ## What's next
 
