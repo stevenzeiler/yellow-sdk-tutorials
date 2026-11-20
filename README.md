@@ -18,9 +18,9 @@ Create a `.env` file in the repo root (it is gitignored). Env var names:
 
 | Name | Used by |
 |---|---|
-| `SEED_PHRASE` | Every script. A 12 or 24 word mnemonic for a Base wallet |
-| `WALLET_1_SEED_PHRASE` | `scripts/app_session_two_signers.ts` (first signer) |
-| `WALLET_2_SEED_PHRASE` | App session scripts (second signer) |
+| `SEED_PHRASE` | Most scripts, directly or through `lib/auth.ts`. A 12 or 24 word mnemonic for a Base wallet. In `scripts/app_session_two_signers.ts` it is the first signer |
+| `WALLET_1_SEED_PHRASE` | `scripts/app_sessions/app_session_two_signers.ts` (first signer) |
+| `WALLET_2_SEED_PHRASE` | Both app session scripts (second signer) |
 
 ```bash
 SEED_PHRASE="..."   # your own wallet; never commit it
